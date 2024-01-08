@@ -8,7 +8,8 @@
                 <div class="mb-4">
                     <form class="m-auto w-2/4">
                         <div>
-                            <h1 for="first_name" class="block mb-5 text-2xl font-extrabold text-gray-900">Kayıt Ol</h1>
+                            <h1 for="first_name" class="block mb-5 text-2xl font-extrabold text-gray-900">
+                                {{ $t("messages.register") }} </h1>
                             <input type="email"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  placeholder-gray-400 "
                                 placeholder="e-mail" required>
@@ -27,7 +28,6 @@
                             <button
                                 class="px-4 py-2 bg-slate-400 hover:bg-slate-500 duration-200 hover:duration-200 rounded-lg w-full text-white text-lg font-extrabold">Kayıt
                                 Ol</button>
-
                         </div>
                     </form>
                 </div>
