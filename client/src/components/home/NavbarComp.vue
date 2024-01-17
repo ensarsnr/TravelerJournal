@@ -16,8 +16,8 @@
             <li>
               <a class="hover:text-gray-200" href="#">Takip ettiklerin</a>
             </li>
-            <li><a class="hover:text-gray-200" href="#">Collections</a></li>
-            <li><a class="hover:text-gray-200" href="#">Contact Us</a></li>
+            <li><a class="hover:text-gray-200" href="#">Koleksiyonlarım</a></li>
+            <li><a class="hover:text-gray-200" href="#">Trendler</a></li>
           </ul>
           <!-- Header Icons -->
           <div class="hidden xl:flex items-center space-x-5">
