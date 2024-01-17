@@ -5,6 +5,7 @@ const dotenv = require("dotenv");
 
 // routes
 const authRoutes = require("./routes/auth");
+const getUserRoutes = require("./routes/getUser");
 
 dotenv.config();
 
@@ -17,8 +18,8 @@ app.use(cors());
 app.use(express.json());
 
 // Endpointler
-
 app.use("/auth", authRoutes);
+app.use("/get", getUserRoutes);
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
