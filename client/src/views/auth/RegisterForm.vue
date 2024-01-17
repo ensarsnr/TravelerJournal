@@ -20,6 +20,7 @@
               </h1>
               <input
                 :value="email"
+                type="email"
                 @input="onChangeEmail"
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 placeholder-gray-400"
                 placeholder="e-mail"
@@ -54,7 +55,10 @@
                 Kayıt Ol
               </button>
             </div>
-            <router-link to="/login">asdasd</router-link>
+            <div class="text-sm mt-5"> 
+              <span>Hesabın varsa </span>
+              <router-link to="/login" class="text-gray-500">giriş yap</router-link>
+            </div>
           </form>
         </div>
         <div class="p-10 text-sm text-slate-400">
@@ -96,14 +100,14 @@ export default {
     async authRegister() {
       try {
         const response = await services.register(
-          this.email,
           this.username,
+          this.email,
           this.password
         );
         console.log(`Register response: ${response}`);
         const token = response.data.token;
         localStorage.setItem("userToken", token);
-        // this.$router.push("/") anasayfaya atacak..
+        this.$router.push("/home") 
       } catch (error) {
         if (error.response) {
           console.error(
@@ -113,7 +117,6 @@ export default {
         } else if (error.request) {
           console.error("No response received from the server");
         } else {
-          // Something happened in setting up the request that triggered an Error
           console.error("Error setting up the request:", error.message);
         }
       }
