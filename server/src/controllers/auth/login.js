@@ -8,25 +8,27 @@ const login = async (req, res) => {
   try {
     // Kullanıcıyı bul
     const user = await User.findOne({ username });
-    // Kullanıcının varlığını kontrol ediyoruz.
+
+    // Kullanıcının varlığını kontrol et
     if (!user) {
-      res.status(400).json({ message: "User not found" });
+      return res.status(404).json({ message: "User not found" });
     }
+
     // Şifre kontrolü, compare karşılaştırma işini görüyor.
-    const passwordMatch = await bcrypt.compare(password, user.password); // kullanıcının passwordu ile girilen password'u karşılaştırıyor.
+    const passwordMatch = await bcrypt.compare(password, user.password);
 
     // password'un doğrulunu kontrol ediyoruz. True ise token oluştururp girişi sağlayacaz.
     if (passwordMatch) {
       const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET, {
         expiresIn: "1h",
       });
-      res.status(400).json({ message: "Login sucessful" });
+      return res.status(200).json({ message: "Login successful", token });
     } else {
       // password hatalıysa buraya giriş yapacak.
-      res.status(400).json({ message: "Password doesn't match" });
+      return res.status(401).json({ message: "Password doesn't match" });
     }
   } catch (error) {
-    res.status(500).json({ message: "Internal server error" });
+    return res.status(500).json({ message: "Internal server error" });
   }
 };
 
