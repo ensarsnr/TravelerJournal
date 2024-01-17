@@ -6,7 +6,7 @@
       </div>
       <div class="p-2">
         <h3 class="text-center text-xl text-gray-900 font-medium leading-8">
-          Joh Doe
+          {{user.username}}
         </h3>
         <table class="text-xs my-3">
           <tbody>
@@ -18,7 +18,7 @@
             </tr>
             <tr>
               <td class="px-2 py-2 text-gray-500 font-semibold">Email:</td>
-              <td class="px-2 py-2">email@email.com</td>
+              <td class="px-2 py-2">{{ user.email }}</td>
             </tr>
             <tr>
               <td class="px-2 py-2 text-gray-500">Çıkış yap</td>
@@ -31,11 +31,28 @@
   </div>
 </template>
 <script>
+import services from '@/services';
+
 export default {
     data() {
         return {
-            userName: ""
+            user: {}
         }
     },
+    mounted() {
+      this.profile()
+    },
+    methods: {
+  async profile() {
+    try {
+      const response = await services.profile(); 
+      this.user = response.data.user; 
+      console.log(`Profile: ${response}`);
+    } catch (error) {
+      console.log(`Get profile: ${error}`);
+    }
+  }
+},
+
 };
 </script>
