@@ -7,6 +7,7 @@ const userSchema = new mongoose.Schema({
   followers: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
   following: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
   posts: [{ type: mongoose.Schema.Types.ObjectId, ref: "Post" }],
+  profilePhoto: { type: String, default: "photo" },
 });
 
 const User = mongoose.model("User", userSchema);
