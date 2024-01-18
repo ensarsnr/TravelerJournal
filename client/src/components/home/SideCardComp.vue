@@ -65,7 +65,6 @@ export default {
     async profile() {
       try {
         const response = await services.profile();
-        console.log(response);
         return response.data.user;
       } catch (error) {
         console.log(`Get profile: ${error}`);
