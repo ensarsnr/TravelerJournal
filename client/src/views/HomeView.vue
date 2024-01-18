@@ -26,9 +26,23 @@
 <script>
 import NavbarComp from "../components/home/NavbarComp.vue";
 import SideCard from "../components/home/SideCardComp.vue";
-
 export default {
   components: { NavbarComp, SideCard },
+
+  mounted() {
+    if (localStorage.getItem("reloaded")) {
+      localStorage.removeItem("reloaded");
+    } else {
+      localStorage.setItem("reloaded", "1");
+      location.reload();
+    }
+  },
+
+  data() {
+    return {
+      count: true,
+    };
+  },
 
   beforeRouteEnter(to, from, next) {
     const userToken = localStorage.getItem("userToken");
