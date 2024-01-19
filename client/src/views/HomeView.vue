@@ -4,10 +4,10 @@
 
     <div class="container mx-auto mt-4">
       <div class="grid grid-cols-10 gap-4">
-        <div class="col-span-2 p-4">
+        <div class="col-span-3 p-4">
           <SideCard />
         </div>
-        <div class="col-span-8 p-4">
+        <div class="col-span-7 p-4">
           <div class="flex flex-col w-4/5 bg-black">
             <div class="flex">
               <div class="m-1">pp</div>

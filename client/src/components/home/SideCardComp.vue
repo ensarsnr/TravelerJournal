@@ -28,10 +28,15 @@
               <td class="px-2 py-2 hover:text-gray-600 text-gray-500">
                 <button @click="exitProflie">Çıkış yap</button>
               </td>
-              <td class="px-2 py-2 text-end text-gray-500">Ayarlar</td>
+              <td class="px-2 py-2 text-end text-gray-500">
+                <button @click="openSettings">Ayarlar</button>
+              </td>
             </tr>
           </tbody>
         </table>
+      </div>
+      <div>
+        <SettingsModel />
       </div>
     </div>
   </div>
@@ -39,8 +44,12 @@
 
 <script>
 import services from "@/services";
+import SettingsComp from "../../components/settings/SettingsComp.vue";
 
 export default {
+
+  components:{SettingsComp},
+
   data() {
     return {
       user: {
