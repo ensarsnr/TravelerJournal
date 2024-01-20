@@ -35,20 +35,18 @@
           </tbody>
         </table>
       </div>
-      <div>
-        <SettingsModel />
-      </div>
     </div>
   </div>
+  <!-- <SettingsModel /> -->
 </template>
 
 <script>
 import services from "@/services";
-import SettingsComp from "../../components/settings/SettingsComp.vue";
+// import SettingsComp from "../../components/settings/SettingsComp.vue";
 
 export default {
 
-  components:{SettingsComp},
+  // components: {SettingsComp},
 
   data() {
     return {
