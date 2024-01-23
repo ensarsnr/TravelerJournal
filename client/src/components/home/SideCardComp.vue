@@ -4,7 +4,6 @@
       <div class="photo-wrapper p-2">
         <img
           class="w-32 h-32 bg-black rounded-full mx-auto"
-          
           alt="Profil Fotoğrafı"
         />
       </div>
@@ -37,17 +36,12 @@
       </div>
     </div>
   </div>
-  <!-- <SettingsModel /> -->
 </template>
 
 <script>
 import services from "@/services";
-// import SettingsComp from "../../components/settings/SettingsComp.vue";
 
 export default {
-
-  // components: {SettingsComp},
-
   data() {
     return {
       user: {
@@ -78,10 +72,10 @@ export default {
         throw error;
       }
     },
-    exitProflie () {
+    exitProflie() {
       localStorage.clear();
       this.$router.push("/");
-    }
+    },
   },
 };
 </script>
