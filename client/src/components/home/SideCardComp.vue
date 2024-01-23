@@ -28,11 +28,14 @@
                 <button @click="exitProflie">Çıkış yap</button>
               </td>
               <td class="px-2 py-2 text-end text-gray-500">
-                <button @click="openSettings">Ayarlar</button>
+                <button @click="showSettings">Ayarlar</button>
               </td>
             </tr>
           </tbody>
         </table>
+      </div>
+      <div v-if="show" class="text-red-500 text-8xl">
+      <SettingsComp :exitSettings="exitSettings" :username="username" /> 
       </div>
     </div>
   </div>
@@ -40,10 +43,12 @@
 
 <script>
 import services from "@/services";
-
+import SettingsComp from "../home/SettingsComp.vue";
 export default {
+  components:{SettingsComp},
   data() {
     return {
+      show: false,
       user: {
         // profilePhoto: "", // Profil fotoğrafı
         postCount: 0, // Paylaşımlar sayısı
@@ -71,6 +76,12 @@ export default {
         console.log(`Get profile: ${error}`);
         throw error;
       }
+    },
+    showSettings() {
+      this.show = !this.show;
+    },
+    exitSettings() {
+      this.show = !this.show;
     },
     exitProflie() {
       localStorage.clear();
