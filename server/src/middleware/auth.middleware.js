@@ -15,6 +15,14 @@ module.exports = (req, res, next) => {
     next();
   } catch (error) {
     console.error(`Authentication error: ${error.message}`);
+    
+    // Hata JWT'nin süresi dolmuşsa (expired), yeni bir token oluşturabilirsiniz
+    if (error.name === "TokenExpiredError") {
+      res.setHeader("Authorization", `Bearer ${newToken}`);
+      return res.status(401).json({ message: "Token expired. New token provided." });
+    }
+
+    // Diğer hata durumlarını burada ele alabilirsiniz
     return res.status(401).json({ message: "Authentication Failed" });
   }
 };
