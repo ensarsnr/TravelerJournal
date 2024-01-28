@@ -6,6 +6,7 @@ const dotenv = require("dotenv");
 // routes
 const authRoutes = require("./routes/auth");
 const profileRoutes = require("./routes/profile");
+const postRoutes = require("./routes/post");
 
 dotenv.config();
 
@@ -20,6 +21,7 @@ app.use(express.json());
 // Endpointler
 app.use("/auth", authRoutes);
 app.use("/get", profileRoutes);
+app.use("/post", postRoutes);
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
