@@ -24,9 +24,13 @@
   <div v-if="showModal">
     <AddPostComp :exitModal="exitModal" />
   </div>
-  <div @click="showModal = true" class='fixed bottom-0 w-full'>
-    <button class='bottom-0 my-8 float-right mr-5 h-16 w-16 bg-blue-400 text-white text-4xl  tracking-wide rounded-full focus:outline-none'>+</button>
-</div>
+  <div @click="showModal = true" class="fixed bottom-0 w-full">
+    <button
+      class="bottom-0 my-8 float-right mr-5 h-16 w-16 bg-blue-400 text-white text-4xl tracking-wide rounded-full focus:outline-none"
+    >
+      +
+    </button>
+  </div>
 </template>
 
 <script>
@@ -50,13 +54,14 @@ export default {
     return {
       count: true,
       showModal: false,
+      images: [],
     };
   },
 
   methods: {
-    exitModal () {
+    exitModal() {
       this.showModal = !this.showModal;
-    }
+    },
   },
 
   beforeRouteEnter(to, from, next) {
