@@ -5,6 +5,7 @@ const api = axios.create({
   headers: {
     Authorization: `Bearer ${localStorage.getItem("userToken")}`,
     "Content-Type": "application/json",
+    // 'Content-Type': 'multipart/form-data',
   },
 });
 
