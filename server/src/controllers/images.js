@@ -23,7 +23,6 @@ const storage = multer.diskStorage({
 
 
 const upload = multer({ storage: storage });
-
 const images = async (req, res) => {
   const { caption } = req.body;
 
@@ -40,18 +39,23 @@ const images = async (req, res) => {
       return res.status(404).json({ error: "User not found" });
     }
 
-    // Resim yükleme işlemi
+    // Multer middleware for handling file upload
     upload.single("image")(req, res, async function (err) {
       if (err) {
         console.log('Multer error:', err);
         return res.status(500).json({ error: "Unknown error" });
       }
 
+      // Check if req.file exists
+      if (!req.file) {
+        return res.status(400).json({ error: "No file provided" });
+      }
+
       // Yüklü resmin bilgileri
       const image = {
-        user: userId,
+        user: userId,  // Set the 'user' field
         image: req.file.filename,
-        caption: caption,
+        caption: caption || "",  // Use the 'caption' field if defined, or an empty string
       };
 
       // Yeni bir Post oluştur ve veritabanına kaydet
@@ -72,5 +76,7 @@ const images = async (req, res) => {
     res.status(500).json({ message: "Internal server error" });
   }
 };
+
+
 
 module.exports = images;
