@@ -14,8 +14,8 @@
             <li>
               <a class="hover:text-gray-200" href="#">Takip ettiklerin</a>
             </li>
-            <li><a class="hover:text-gray-200" href="#">Koleksiyonlarım</a></li>
-            <li><a class="hover:text-gray-200" href="#">Trendler</a></li>
+            <li><a class="hover:text-gray-200" href="#">Kaydedilenler</a></li>
+            <li><a class="hover:text-gray-200" href="#">Yüklediklerin</a></li>
           </ul>
         </div>
       </nav>
