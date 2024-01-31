@@ -7,18 +7,43 @@
         <div class="col-span-3 p-4">
           <SideCard />
         </div>
-        <div class="col-span-7 p-4">
-          <div v-for="image in images" :key="image" class="mt-5 flex flex-col w-4/5 bg-black">
-            <div class="flex">
-              <div class="m-1">pp</div>
-              <div class="m-1">kullanıcıadı</div>
+        <div class="col-span-7 p-4 gap-4">
+          <div
+            v-for="post in posts"
+            :key="post"
+            class="mt-5 flex flex-col w-4/5 rounded-lg border-gray-300 border-[1px]"
+          >
+            <div class="flex p-3">
+              <div class="m-1">
+                <div class="w-16 h-16 bg-black rounded-full"></div>
+              </div>
+              <div class="m-1 flex flex-col">
+                <span class="font-bold">{{ post.user.username }}</span>
+                <span class="text-sm text-gray-400">300 takipçi</span>
+                <span class="text-sm text-gray-400">{{
+                  formatDateTime(post.createdAt)
+                }}</span>
+              </div>
             </div>
-            <div class="h-52 bg-orange-400">
-              <!-- <img :src="`../../../server/src/uploads/1706453389062.jpeg`" /> -->
-              <p>{{ image.image }}</p>
+            <div
+              class="flex max-w-full max-h-lg m-auto rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
+            >
+              <img
+                class="w-full justify-items-center"
+                :src="require(`../../../server/src/uploads/${post.image}`)"
+              />
             </div>
-            <div>beğenme, kaydetme</div>
-            <div>beğeni saysı</div>
+            <div class="flex flex-col p-3">
+              <div class="flex justify-between mt-3">
+                <div>Beğenme sayısı</div>
+                <div>Kaydetme sayısı</div>
+              </div>
+              <div class="border-gray-400  border-t-[1px] mt-3"></div>
+              <div class="grid grid-cols-2 mt-3">
+                <div class=" rounded-md text-center duration-500 hover:duration-500 hover:bg-gray-200 hover:cursor-pointer p-2">Beğen</div>
+                <div class=" rounded-md text-center duration-500 hover:duration-500 hover:bg-gray-200 hover:cursor-pointer p-2">Kaydet</div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -53,14 +78,13 @@ export default {
       localStorage.setItem("reloaded", "1");
       location.reload();
     }
-    
   },
 
   data() {
     return {
       count: true,
       showModal: false,
-      images: [],
+      posts: [],
     };
   },
 
@@ -68,15 +92,23 @@ export default {
     exitModal() {
       this.showModal = !this.showModal;
     },
-    async getImages () {
+    async getImages() {
       try {
         const response = await services.getImages();
-        this.images = response.data.images;
-        console.log(response.data.images[0]);
+        this.posts = response.data.posts;
+        console.log(response.data.posts);
       } catch (error) {
-        console.log(`getImages error client: ${error}`)
+        console.log(`getImages error client: ${error}`);
       }
-    }
+    },
+    formatDateTime(dateTimeString) {
+      const options = { year: "numeric", month: "long", day: "numeric" };
+      const formattedDateTime = new Date(dateTimeString).toLocaleDateString(
+        "tr",
+        options
+      );
+      return formattedDateTime;
+    },
   },
 
   beforeRouteEnter(to, from, next) {
@@ -90,3 +122,9 @@ export default {
   },
 };
 </script>
+
+<style>
+body {
+  background-color: rgb(243, 243, 243);
+}
+</style>
