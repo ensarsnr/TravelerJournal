@@ -13,16 +13,25 @@
             :key="post"
             class="mt-5 flex flex-col w-4/5 rounded-lg border-gray-300 border-[1px]"
           >
-            <div class="flex p-3">
-              <div class="m-1">
-                <div class="w-16 h-16 bg-black rounded-full"></div>
+            <div class="flex p-3 justify-between">
+              <div class="flex">
+                <div class="m-1">
+                  <div class="w-16 h-16 bg-black rounded-full"></div>
+                </div>
+                <div class="m-1 flex flex-col">
+                  <span class="font-bold">{{ post.user.username }}</span>
+                  <span class="text-sm text-gray-400">300 takipçi</span>
+                  <span class="text-sm text-gray-400">{{
+                    formatDateTime(post.createdAt)
+                  }}</span>
+                </div>
               </div>
-              <div class="m-1 flex flex-col">
-                <span class="font-bold">{{ post.user.username }}</span>
-                <span class="text-sm text-gray-400">300 takipçi</span>
-                <span class="text-sm text-gray-400">{{
-                  formatDateTime(post.createdAt)
-                }}</span>
+              <div>
+                <button
+                  class="mt-2 rounded-md px-4 py-2 bg-blue-400 text-white font-bold duration-100 hover:duration-10 hover:bg-blue-500"
+                >
+                  Takip et
+                </button>
               </div>
             </div>
             <div
@@ -38,10 +47,18 @@
                 <div>Beğenme sayısı</div>
                 <div>Kaydetme sayısı</div>
               </div>
-              <div class="border-gray-400  border-t-[1px] mt-3"></div>
+              <div class="border-gray-400 border-t-[1px] mt-3"></div>
               <div class="grid grid-cols-2 mt-3">
-                <div class=" rounded-md text-center duration-500 hover:duration-500 hover:bg-gray-200 hover:cursor-pointer p-2">Beğen</div>
-                <div class=" rounded-md text-center duration-500 hover:duration-500 hover:bg-gray-200 hover:cursor-pointer p-2">Kaydet</div>
+                <div
+                  class="rounded-md text-center duration-500 hover:duration-500 hover:bg-gray-200 hover:cursor-pointer p-2"
+                >
+                  Beğen
+                </div>
+                <div
+                  class="rounded-md text-center duration-500 hover:duration-500 hover:bg-gray-200 hover:cursor-pointer p-2"
+                >
+                  Kaydet
+                </div>
               </div>
             </div>
           </div>
