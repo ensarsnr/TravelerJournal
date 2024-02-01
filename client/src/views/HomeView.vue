@@ -20,7 +20,7 @@
                 </div>
                 <div class="m-1 flex flex-col">
                   <span class="font-bold">{{ post.user.username }}</span>
-                  <span class="text-sm text-gray-400">300 takipçi</span>
+                  <span class="text-sm text-gray-400">{{ post.user.followers.length }} takipçi</span>
                   <span class="text-sm text-gray-400">{{
                     formatDateTime(post.createdAt)
                   }}</span>
@@ -44,7 +44,7 @@
             </div>
             <div class="flex flex-col p-3">
               <div class="flex justify-between mt-3">
-                <div>Beğenme sayısı</div>
+                <div>{{ post.likes.length }}</div>
                 <div>Kaydetme sayısı</div>
               </div>
               <div class="border-gray-400 border-t-[1px] mt-3"></div>
