@@ -5,6 +5,9 @@ const getImages = async (req, res) => {
   try {
     const posts = await Post.find({}).populate("user"); // Kullanıcının bilgilerini içeren postları çek
 
+    // kullanıcının sadece ismini almam yeterli aslında.
+    // password falan boşuna geliyor orayı buralara yazacağım kod ile hallederim.
+
     // Eğer post bulunamazsa, 404 hatası döndür
     if (!posts || posts.length === 0) {
       return res.status(404).json({ error: "No posts found" });
