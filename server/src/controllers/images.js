@@ -78,5 +78,14 @@ const images = async (req, res) => {
 };
 
 
+const deleteImage = async (req, res) => {
+  const {imageId} = req.body;
+
+  try {
+
+  } catch (error) {
+    res.status(500).json({message: "Internal server error"})
+  }
+}
 
 module.exports = images;
