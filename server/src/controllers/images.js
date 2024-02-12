@@ -1,6 +1,6 @@
 const multer = require("multer");
 const path = require("path");
-const fs = require("fs"); 
+const fs = require("fs");
 const Post = require("../models/post");
 const User = require("../models/user");
 
@@ -20,7 +20,6 @@ const storage = multer.diskStorage({
     cb(null, Date.now() + path.extname(file.originalname)); // Resmin ismi
   },
 });
-
 
 const upload = multer({ storage: storage });
 const images = async (req, res) => {
@@ -42,7 +41,7 @@ const images = async (req, res) => {
     // Multer middleware for handling file upload
     upload.single("image")(req, res, async function (err) {
       if (err) {
-        console.log('Multer error:', err);
+        console.log("Multer error:", err);
         return res.status(500).json({ error: "Unknown error" });
       }
 
@@ -53,9 +52,9 @@ const images = async (req, res) => {
 
       // Yüklü resmin bilgileri
       const image = {
-        user: userId,  // Set the 'user' field
+        user: userId, // Set the 'user' field
         image: req.file.filename,
-        caption: caption || "",  // Use the 'caption' field if defined, or an empty string
+        caption: caption || "", // Use the 'caption' field if defined, or an empty string
       };
 
       // Yeni bir Post oluştur ve veritabanına kaydet
@@ -76,16 +75,5 @@ const images = async (req, res) => {
     res.status(500).json({ message: "Internal server error" });
   }
 };
-
-
-const deleteImage = async (req, res) => {
-  const {imageId} = req.body;
-
-  try {
-
-  } catch (error) {
-    res.status(500).json({message: "Internal server error"})
-  }
-}
 
 module.exports = images;
