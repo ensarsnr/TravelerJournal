@@ -66,7 +66,7 @@ const images = async (req, res) => {
       await user.save();
 
       res.status(201).json({
-        message: "Resim başarıyla yüklendi.",
+        message: "The image has been uploaded successfully.",
         post: newPost,
       });
     });
