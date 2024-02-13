@@ -7,8 +7,16 @@
         <div class="col-span-3 p-4">
           <SideCard />
         </div>
+        <!--
+           Buradan sonrasını farklı bir component haline getirebilirim.
+           HomePostComp diye bir ad koyarız.
+        -->
         <div class="col-span-7 p-4 gap-4">
-          <div v-for="post in posts" :key="post" class="mt-5 flex flex-col w-4/5 rounded-lg border-gray-300 border-[1px]">
+          <div
+            v-for="post in posts.slice().reverse()"
+            :key="post"
+            class="mt-5 flex flex-col w-4/5 rounded-lg border-gray-300 border-[1px]"
+          >
             <div class="flex p-3 justify-between">
               <div class="flex">
                 <div class="m-1">
@@ -16,7 +24,9 @@
                 </div>
                 <div class="m-1 flex flex-col">
                   <span class="font-bold">{{ post.user.username }}</span>
-                  <span class="text-sm text-gray-400">{{ post.user.followers.length }} takipçi</span>
+                  <span class="text-sm text-gray-400"
+                    >{{ post.user.followers.length }} takipçi</span
+                  >
                   <span class="text-sm text-gray-400">{{
                     formatDateTime(post.createdAt)
                   }}</span>
@@ -24,14 +34,20 @@
               </div>
               <div>
                 <button
-                  class="mt-2 rounded-md px-4 py-2 bg-blue-400 text-white font-bold duration-100 hover:duration-10 hover:bg-blue-500">
+                  @click="followUser(post.user._id)"
+                  class="mt-2 rounded-md px-4 py-2 bg-blue-400 text-white font-bold duration-100 hover:duration-10 hover:bg-blue-500"
+                >
                   Takip et
                 </button>
               </div>
             </div>
-            <div class="flex max-w-full h-96 m-auto rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-              <img class="object-cover"
-                :src="require(`../../../server/src/uploads/${post.image}`)" />
+            <div
+              class="flex max-w-full h-96 m-auto rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
+            >
+              <img
+                class="object-cover"
+                :src="require(`../../../server/src/uploads/${post.image}`)"
+              />
             </div>
             <div class="flex flex-col p-3">
               <div class="flex justify-between mt-3">
@@ -41,11 +57,13 @@
               <div class="border-gray-400 border-t-[1px] mt-3"></div>
               <div class="grid grid-cols-2 mt-3">
                 <div
-                  class="rounded-md text-center duration-500 hover:duration-500 hover:bg-gray-200 hover:cursor-pointer p-2">
+                  class="rounded-md text-center duration-500 hover:duration-500 hover:bg-gray-200 hover:cursor-pointer p-2"
+                >
                   Beğen
                 </div>
                 <div
-                  class="rounded-md text-center duration-500 hover:duration-500 hover:bg-gray-200 hover:cursor-pointer p-2">
+                  class="rounded-md text-center duration-500 hover:duration-500 hover:bg-gray-200 hover:cursor-pointer p-2"
+                >
                   Kaydet
                 </div>
               </div>
@@ -60,7 +78,8 @@
   </div>
   <div @click="showModal = true" class="fixed bottom-0 w-full">
     <button
-      class="bottom-0 my-8 float-right mr-5 h-16 w-16 bg-blue-400 text-white text-4xl tracking-wide rounded-full focus:outline-none">
+      class="bottom-0 my-8 float-right mr-5 h-16 w-16 bg-blue-400 text-white text-4xl tracking-wide rounded-full focus:outline-none"
+    >
       +
     </button>
   </div>
@@ -90,6 +109,7 @@ export default {
       count: true,
       showModal: false,
       posts: [],
+      userId: "",
     };
   },
 
@@ -113,6 +133,19 @@ export default {
         options
       );
       return formattedDateTime;
+    },
+
+    async followUser(getId) {
+      
+      this.userId = getId;
+      
+      console.log("USERR: "+this.userId)
+      try {
+        const response = services.follow(this.userId);
+        console.log(response.data);
+      } catch (error) {
+        console.log(error);
+      }
     },
   },
 
