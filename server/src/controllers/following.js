@@ -15,11 +15,28 @@ const follow = async (req, res) => {
       return res.status(404).json({ message: "User not found" });
     }
 
-    user.followers.push(user);
-    await user.save();
+    if (user.followers.includes(userId)) {
+      const filteredFollowers = user.followers.filter(
+        (id) => id.toString() !== userId
+      );
+      user.followers = filteredFollowers;
+      await user.save();
+      return res
+        .status(400)
+        .json({ message: "This user is already followed.", follow: user });
+    } else {
+      user.followers.push(userId);
+      await user.save();
+    }
 
-    res.status(201).json({ message: "Successfully tracked", follow: user });
+    res
+      .status(201)
+      .json({
+        message: "The user has been successfully followed.",
+        follow: user,
+      });
   } catch (error) {
+    console.error(error);
     res.status(500).json({ message: "Internal server error" });
   }
 };
