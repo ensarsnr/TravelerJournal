@@ -76,8 +76,9 @@
   <div v-if="showModal">
     <AddPostComp :exitModal="exitModal" />
   </div>
-  <div @click="showModal = true" class="fixed bottom-0 w-full">
+  <div  class="fixed bottom-0 w-full">
     <button
+    @click="showModal = true"
       class="bottom-0 my-8 float-right mr-5 h-16 w-16 bg-blue-400 text-white text-4xl tracking-wide rounded-full focus:outline-none"
     >
       +
