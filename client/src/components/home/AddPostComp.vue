@@ -71,7 +71,7 @@ export default {
     reader.readAsDataURL(image);
     reader.onload = (e) => {
       this.image = e.target.result;
-      this.file = image; // file değişkenini güncelle
+      this.file = image; 
       console.log(this.image);
     };
   },
