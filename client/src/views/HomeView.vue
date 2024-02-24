@@ -35,9 +35,10 @@
               <div>
                 <button
                   @click="followUser(post.user._id)"
+                  
                   class="mt-2 rounded-md px-4 py-2 bg-blue-400 text-white font-bold duration-100 hover:duration-10 hover:bg-blue-500"
                 >
-                  Takip et
+                  {{followButton}}
                 </button>
               </div>
             </div>
@@ -76,9 +77,9 @@
   <div v-if="showModal">
     <AddPostComp :exitModal="exitModal" />
   </div>
-  <div  class="fixed bottom-0 w-full">
+  <div class="fixed bottom-0 w-full">
     <button
-    @click="showModal = true"
+      @click="showModal = true"
       class="bottom-0 my-8 float-right mr-5 h-16 w-16 bg-blue-400 text-white text-4xl tracking-wide rounded-full focus:outline-none"
     >
       +
@@ -103,6 +104,7 @@ export default {
       localStorage.setItem("reloaded", "1");
       location.reload();
     }
+    this.followUser();
   },
 
   data() {
@@ -111,6 +113,7 @@ export default {
       showModal: false,
       posts: [],
       userId: "",
+      followButton: "Takip et",
     };
   },
 
@@ -136,18 +139,26 @@ export default {
       return formattedDateTime;
     },
 
-    async followUser(getId) {
-      
-      this.userId = getId;
-      
-      console.log("USERR: "+this.userId)
-      try {
-        const response = services.follow(this.userId);
-        console.log(response.data);
-      } catch (error) {
-        console.log(error);
-      }
-    },
+    async followUser(userId) {
+  try {
+    // Takip işlemini gerçekleştirin
+    const response = await services.follow(userId);
+
+    // Takip durumuna göre düğme metnini güncelleyin
+    if(response.data.messages == undefined) {
+      this.followButton = "Takip edildi";
+      this.getImages()
+    }else {
+      this.followButton = "Takip et";
+      this.getImages()
+    }
+
+    // Kullanıcı bilgilerini yeniden alarak güncel takip durumunu gösterin
+  } catch (error) {
+    console.log(error);
+  }
+},
+
   },
 
   beforeRouteEnter(to, from, next) {
